@@ -1,0 +1,54 @@
+#Code to be triggered from Platform team#
+name: Platform Source Code
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  workflow_dispatch:
+jobs:
+  EnvSetup:
+    name: Setup Dynamic Environment Variables
+    runs-on: ubuntu-latest
+  workflow-1:
+    name:  Workflow 1
+    needs: EnvSetup
+    uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
+    with:
+      apply_envt: "non-prod"
+      CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/username"
+    secrets: 
+      CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
+
+  workflow-2:
+    name: Workflow 2
+    needs: EnvSetup
+    uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
+    with:
+      apply_envt: "non-prod"
+      CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/password"
+    secrets: 
+      CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
+  
+  workflow-3:
+    name: Workflow 3
+    needs: EnvSetup
+    uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
+    with:
+      apply_envt: "non-prod"
+      CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/address"
+    secrets: 
+      CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
+  
+  use-WIZ_CLIENT_SECRET:
+    name: Use WIZ_CLIENT_SECRET
+    runs-on: ubuntu-latest
+    needs: [workflow-1, workflow-2, workflow-3]
+    steps:
+      - name: Write wiz secrets to file
+        run: |
+          set +x
+          S1=${{ needs.terraform-workflow-1.outputs.WIZ_CLIENT_SECRET }}
+          echo "::add-mask::$S1" 
+          echo "Len(S1)=${#S1}"
+  
