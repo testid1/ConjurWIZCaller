@@ -3,39 +3,29 @@ name: Platform Source Code
 permissions:
   id-token: write
   contents: read
-
 on:
   workflow_dispatch:
 jobs:
-  EnvSetup:
-    name: Setup Dynamic Environment Variables
-    runs-on: ubuntu-latest
   workflow-1:
     name:  Workflow 1
-    needs: EnvSetup
     uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
     with:
-      apply_envt: "non-prod"
       CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/username"
     secrets: 
       CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
 
   workflow-2:
     name: Workflow 2
-    needs: EnvSetup
     uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
     with:
-      apply_envt: "non-prod"
       CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/password"
     secrets: 
       CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
   
   workflow-3:
     name: Workflow 3
-    needs: EnvSetup
     uses: testid1/ConjurWIZ/.github/workflows/reusable.yaml@main
     with:
-      apply_envt: "non-prod"
       CONJUR_ORG_VARIABLE_PATH: "data/vault/conjurtest/conjurtest/address"
     secrets: 
       CONJUR_API_KEY: ${{ secrets.CONJUR_API_KEY }}
