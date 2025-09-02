@@ -35,10 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [workflow-1, workflow-2, workflow-3]
     steps:
-      - name: Mask wiz secrets to file
-        run: |
-          set +x
-          echo "::add-mask::${{ needs.workflow-1.outputs.wiz_client_secret }}"
       - name: Write wiz secrets to file
         run: |
           set +x
@@ -46,3 +42,7 @@ jobs:
           echo "::add-mask::$S1" 
           echo "Len(S1)=${#S1}"
   
+ #     - name: Mask wiz secrets to file
+ #       run: |
+ #         set +x
+ #         echo "::add-mask::${{ needs.workflow-1.outputs.wiz_client_secret }}"
