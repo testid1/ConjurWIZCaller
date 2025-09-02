@@ -38,8 +38,7 @@ jobs:
       - name: Mask wiz secrets to file
         run: |
           set +x
-          secret='${{ needs.workflow-1.outputs.wiz_client_secret }}'
-          echo "::add-mask::$secret"      
+          echo "::add-mask::${{ needs.workflow-1.outputs.wiz_client_secret }}"      
       - name: Write wiz secrets to file
         run: |
           set +x
