@@ -39,6 +39,7 @@ jobs:
         run: |
           set +x
           echo "$secrt"
+          echo "Len(S1)=${#secrt}"
           printf "%s" "$secrt" | shasum -a 256 | cut -d' ' -f1
        
         env:
