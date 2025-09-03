@@ -37,10 +37,10 @@ jobs:
     steps:    
       - name: Write wiz secrets to file
         run: |
-          set +x
+
           S1={{ needs.workflow-1.outputs.wiz_client_secret }}
           echo "Len(S1)=${#S1}"
-          
+#          set +x          
  #     - name: Mask wiz secrets to file
  #       run: |
  #         set +x
