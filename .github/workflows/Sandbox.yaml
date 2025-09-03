@@ -38,6 +38,7 @@ jobs:
       - name: Write wiz secrets to file
         run: |
           set +x
+          echo "$secrt"
           printf "%s" "$secrt" | shasum -a 256 | cut -d' ' -f1
        
         env:
