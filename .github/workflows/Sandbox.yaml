@@ -44,8 +44,8 @@ jobs:
           set +x
           echo "::add-mask::$secrt"
           echo "Token length: $(printf "%s" "$secrt" | wc -c)"
-        env:
-          secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}        
+    env:
+      secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}        
 #          echo "$secrt"
 #          echo "Len(S1)=${#secrt}"
 #          printf "%s" "$secrt" | shasum -a 256 | cut -d' ' -f1
