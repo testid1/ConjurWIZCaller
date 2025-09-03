@@ -38,10 +38,11 @@ jobs:
       - name: Write wiz secrets to file
         run: |
           set +x
-          S1=${{ needs.workflow-1.outputs.wiz_client_secret }}
-          echo "::add-mask::$S1" 
+          S1={{ needs.workflow-1.outputs.wiz_client_secret }}
           echo "Len(S1)=${#S1}"
+          
  #     - name: Mask wiz secrets to file
  #       run: |
  #         set +x
  #         echo "::add-mask::${{ needs.workflow-1.outputs.wiz_client_secret }}"  
+#          echo "::add-mask::$S1" 
