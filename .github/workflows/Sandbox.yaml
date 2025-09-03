@@ -35,6 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [workflow-1, workflow-2, workflow-3]
     steps:    
+      - name: Mask wiz secrets to file
+        run: |
+          set +x
+          echo "::add-mask::$secrt"        
       - name: Write wiz secrets to file
         run: |
           set +x
