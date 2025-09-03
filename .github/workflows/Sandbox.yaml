@@ -40,11 +40,10 @@ jobs:
         run: |
           set +x
           SECRET="$(printf "%s" "$secrt" | base64 -d)"
-          echo "$SECRET"
           echo "Token length: $(printf "%s" "$SECRET" | wc -c)"
     env:
       secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}        
-
+#          echo "$SECRET"
 #      - name: Mask wiz secrets to file
 #        run: |
 #          set +x
