@@ -38,12 +38,14 @@ jobs:
       - name: Write wiz secrets to file
         run: |
           set +x
-          echo "$secrt"
-          echo "Len(S1)=${#secrt}"
-          printf "%s" "$secrt" | shasum -a 256 | cut -d' ' -f1
-       
+          echo "Token length: $(printf "%s" "$secrt" | wc -c)"
         env:
-          secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}
+          secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}        
+#          echo "$secrt"
+#          echo "Len(S1)=${#secrt}"
+#          printf "%s" "$secrt" | shasum -a 256 | cut -d' ' -f1
+       
+
 #          mycli auth --token "$secrt"
 #          S1=${{ needs.workflow-1.outputs.wiz_client_secret }}
 #          echo "Len(S1)=${#S1}"
