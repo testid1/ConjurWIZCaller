@@ -40,14 +40,17 @@ jobs:
         run: |
           set +x
           SECRET1="$(printf "%s" "$secrt1" | base64 -d)"
+          echo "$SECRET1"
           echo "Token length: $(printf "%s" "$SECRET1" | wc -c)"
 
           set +x
           SECRET2="$(printf "%s" "$secrt2" | base64 -d)"
+          echo "$SECRET2"
           echo "Token length: $(printf "%s" "$SECRET2" | wc -c)"          
 
           set +x
           SECRET3="$(printf "%s" "$secrt3" | base64 -d)"
+          echo "$SECRET3"
           echo "Token length: $(printf "%s" "$SECRET3" | wc -c)"
     env:
       secrt1: ${{ needs.workflow-1.outputs.wiz_client_secret }}
