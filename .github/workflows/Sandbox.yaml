@@ -39,8 +39,9 @@ jobs:
       - name: Write wiz secrets to file
         run: |
           set +x
-          echo "::add-mask::$secrt"
-          echo "Token length: $(printf "%s" "$secrt" | wc -c)"
+          SECRET="$(printf "%s" "$secrt" | base64 -d)"
+          echo "::add-mask::$SECRET"
+          echo "Token length: $(printf "%s" "$SECRET" | wc -c)"
     env:
       secrt: ${{ needs.workflow-1.outputs.wiz_client_secret }}        
 
